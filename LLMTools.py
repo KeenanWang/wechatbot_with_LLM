@@ -2,7 +2,7 @@ import random
 from http import HTTPStatus
 import dashscope
 
-dashscope.api_key = "sk-a659ea66e9334f338881166d62da54c5"
+dashscope.api_key = ""
 
 
 def call_with_messages(msg):
