@@ -37,14 +37,14 @@ while True:
                 man_msg = each[1]
         if not man_msg:
             continue
-        if f'@{name}' in man_msg:
-            if dataBase and '今日打卡' in man_msg:
+        if f'@{name}' in man_msg:  # 判断是否@机器人，也是回答规则的开始
+            if dataBase and '今日打卡' in man_msg:  # 根据数据库配置和消息内容判断是否打卡
                 if checkAttendance(session, man):
                     chat.SendMsg(f'用户{man}今天已签到。')  # 回复已签到
                 else:
                     attendanceSubmit(session, man, man_msg)
                     chat.SendMsg(f'好的，今天辛苦了，{man}今天签到成功。')  # 回复签到成功
-            else:
+            else:  # 以下是默认回答，即调用大模型进行回答
                 man_msg = man_msg.strip(f'@{name} ')
                 status, msg = call_with_messages(man_msg)
                 if status:
