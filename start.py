@@ -3,8 +3,9 @@ import time
 from LLMTools import call_with_messages
 from wxauto import WeChat
 
-# config
+# 配置
 dataBase = False  # 是否使用数据库
+name = '小南同学'  # 机器人名字
 
 if dataBase:
     from database_tools import checkAttendance, attendanceSubmit, getSession
@@ -20,7 +21,7 @@ listen_list = [
     '次世代大本营'
 ]
 for i in listen_list:
-    wx.AddListenChat(who=i)  # 添加监听对象并且自动保存新消息图片
+    wx.AddListenChat(who=i)  # 添加监听对象
 
 # 持续监听消息
 wait = 2  # 设置2秒查看一次是否有新消息
@@ -36,7 +37,7 @@ while True:
                 man_msg = each[1]
         if not man_msg:
             continue
-        if '@小南同学' in man_msg:
+        if f'@{name}' in man_msg:
             if dataBase and '今日打卡' in man_msg:
                 if checkAttendance(session, man):
                     chat.SendMsg(f'用户{man}今天已签到。')  # 回复已签到
@@ -44,7 +45,7 @@ while True:
                     attendanceSubmit(session, man, man_msg)
                     chat.SendMsg(f'好的，今天辛苦了，{man}今天签到成功。')  # 回复签到成功
             else:
-                man_msg = man_msg.strip('@小南同学 ')
+                man_msg = man_msg.strip(f'@{name} ')
                 status, msg = call_with_messages(man_msg)
                 if status:
                     chat.SendMsg(msg)

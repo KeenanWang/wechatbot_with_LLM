@@ -1,8 +1,9 @@
 import random
 from http import HTTPStatus
+
 import dashscope
 
-dashscope.api_key = ""
+dashscope.api_key = ""  # 填入你的API key
 
 
 def call_with_messages(msg):
