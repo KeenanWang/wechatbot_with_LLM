@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, Date, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 Base = declarative_base()
-engine = create_engine("mysql+pymysql://root:wangqinan@127.0.0.1:3306/wechatbot?charset=utf8mb4", echo=True)
+engine = create_engine("mysql+pymysql://root:@127.0.0.1:3306/wechatbot?charset=utf8mb4", echo=True)
 
 DBSession = sessionmaker(bind=engine)
 
@@ -59,5 +59,5 @@ def adviceSubmit(session, msg):
 
 if __name__ == '__main__':
     session = getSession()
-    all_attendance = session.query(Attendance).filter_by(name='Keenan.W').all()
+    all_attendance = session.query(Attendance).filter_by(name='').all()
     print(all_attendance)
