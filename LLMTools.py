@@ -3,7 +3,8 @@ from http import HTTPStatus
 
 import dashscope
 
-dashscope.api_key = ""  # 填入你的API key
+with open('F:/ProgrammeProject/PythonProject/api_key.txt', 'r') as f:  # 请更改文件路径，文件中应只包含API Key
+    dashscope.api_key = f.readlines()[0]  # 设置API Key
 
 
 def call_with_messages(msg):
